@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  root "static_pages#home"
+  root "users#new"
   get "/about", to: "static_pages#about"
-  get "/signup", to: "users#new"
+  get "/method.kz", to: "static_pages#method"
+  
   resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.
