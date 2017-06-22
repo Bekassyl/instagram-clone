@@ -1,8 +1,15 @@
-<ul>
+<ul class="list-group">
   <% @users.each do |user| %>
-    <li> <%= link_to user.login, user %>
-      <%= link_to "Edit", edit_user_path(user)%>
-      <%= link_to "Delete", user_path(user), method: :delete, data: {confirm: "R U sure?"} %>
+    <% if current_user == user %>
+      <% next %>
+    <% end %>
+
+    <li class="list-group-item">
+         <%= image_tag "http://placehold.it/60x60", class: "img-circle" %>
+         <%= link_to user.login, user %>
+         <div class="follow" id="user-<%= user.id%>">
+            <%= follows?(user) %>
+         </div>
     </li>
   <% end %>
 </ul>

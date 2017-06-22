@@ -1,2 +1,12 @@
-<%= render "partials/header" %>
-<%= render "partials/home" %>
+<h2><%= @user.login %></h2>
+
+<div class="page_btn">
+  <%= render "partials/page_btn" %>
+</div>
+
+<div class="container">
+  <% @posts.each do |post| %>
+    <%= image_tag post.image(:large) %>
+    <p><%= post.description %></p>
+  <% end %>
+</div>

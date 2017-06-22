@@ -1,3 +1,10 @@
-<% provide :title, "About"%>
-<%= render "partials/header" %>
- 
+<% provide :title, "Home" %>
+
+<div class="posts-wrapper">
+  <% if signed_in? %>
+    <% @posts.each do |post| %>
+      <%= image_tag post.image(:large) %>
+      <p><%= post.description %></p>
+    <% end %>
+  <% end %>
+</div>

@@ -1,0 +1,5 @@
+<% if current_user.id == @user.id %>
+  <%= link_to "Update Profile", edit_user_path(@user.id) %>
+<% else %>
+  <%= render "partials/follow_status" %>
+<% end %>

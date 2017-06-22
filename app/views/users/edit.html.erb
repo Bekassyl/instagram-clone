@@ -1,16 +1,14 @@
-<%if @user.errors.any?%>
+<% if @user.errors.any? %>
   <ul>
-    <% @user.errors.full_messages.each do |m| %>
-      <li> <%= m %> </li>
-    <% end %>
+  <% @user.errors.full_messages.each do |m| %>
+    <li><%= m %></li>
+  <% end %>
   </ul>
 <% end %>
 
-
-<%	provide(:title,	"Edit	user")	%>
 <%= form_for @user do |f| %>
   <%= f.text_field :login %>
   <%= f.text_field :email %>
-  <%= f.text_field :password %>
+  <%= f.password_field :password %>
   <%= f.submit "Edit" %>
 <% end %>

@@ -7,23 +7,23 @@ class UsersController < ApplicationController
   end
 
   def show
-
+    @posts = @user.posts
   end
 
   def destroy
     @user.destroy
-    redirect_to root_path
+    redirect_to users_path
   end
 
   def edit
   end
 
   def update
-    if	@user.update_attributes(user_params)
-			redirect_to	@user
-		else
-			render	"edit"
-		end
+    if @user.update_attributes user_params
+      redirect_to @user
+    else
+      render "edit"
+    end
   end
 
   def new
@@ -31,9 +31,10 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    @user = User.new user_params
     if @user.save
-      redirect_to @user
+      sign_in @user
+      redirect_to root_path
     else
       render "new"
     end

@@ -1,6 +1,10 @@
 class StaticPagesController < ApplicationController
   def home
-  end
+   if signed_in?
+     @posts = current_user.feed
+   else
+   end
+ end
 
   def about
   end
