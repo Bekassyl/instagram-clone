@@ -1,5 +1,12 @@
-<%= form_for @post, html: {multipart: true} do |f|%>
-  <%= f.text_field :description, placeholder: "description" %>
-  <%= f.file_field :image %>
-  <%= f.submit "Post"%>
-<% end %>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3 background">
+    <div class="marg">
+      <center><h2>Add Post</h2></center>
+      <%= form_for @post, html: {multipart: true} do |f|%>
+        <%= f.text_field :description, placeholder: "description", class: "form-control" %>
+        <%= f.file_field :image, class: "form-control" %>
+        <%= f.submit "Post", class: "btn btn-primary"%>
+      <% end %>
+    </div>
+  </div>
+</div>

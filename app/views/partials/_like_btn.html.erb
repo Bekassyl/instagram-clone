@@ -1,0 +1,7 @@
+<div class="like_btn">
+  <% if current_user.liking?(params[:id]) %>
+    <%= render "partials/dislike", post: @post %>
+  <% else %>
+    <%= render "partials/like", post: @post %>
+  <% end %>
+</div>

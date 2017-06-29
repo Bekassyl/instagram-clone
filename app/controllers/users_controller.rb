@@ -7,12 +7,16 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:id])
     @posts = @user.posts
   end
 
   def destroy
-    @user.destroy
-    redirect_to users_path
+    user = User.find(params[:id])
+    if user.present?
+      user.destroy
+    end
+    redirect_to root_path
   end
 
   def edit
@@ -34,6 +38,7 @@ class UsersController < ApplicationController
     @user = User.new user_params
     if @user.save
       sign_in @user
+      # @user.relationships.create(followed_id: @user)
       redirect_to root_path
     else
       render "new"
@@ -43,7 +48,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:login, :email, :password)
+    params.require(:user).permit(:login, :email, :password, :avatar, :bio)
   end
 
   def set_user

@@ -6,9 +6,21 @@
   </ul>
 <% end %>
 
-<%= form_for @user do |f| %>
-  <%= f.text_field :login %>
-  <%= f.text_field :email %>
-  <%= f.password_field :password %>
-  <%= f.submit "Edit" %>
+<% if signed_in? && @user == current_user %>
+<div class="row">
+  <div class="col-md-6 col-md-push-3 background">
+    <div class="marg">
+      <center><h2>Edit Profile</h2></center>
+      <%= form_for @user do |f| %>
+        <%= f.text_field :login, placeholder: "Login", class: "form-control" %>
+        <%= f.text_field :email, placeholder: "Email", class: "form-control" %>
+        <%= f.text_field :bio, placeholder: "A few words about you", class: "form-control" %>
+        <%= f.file_field :avatar, placeholder: "Profile Photo", class: "form-control" %>
+        <%= f.password_field :password, placeholder: "Password", class: "form-control" %>
+        <center> <%= f.submit "Edit", class: "btn btn-primary" %> </center>
+      <% end %>
+      <center> <%= link_to "Delete Account", @user, method: :delete  , class: "btn btn-primary" %> </center>
+    </div>
+  </div>
+</div>
 <% end %>

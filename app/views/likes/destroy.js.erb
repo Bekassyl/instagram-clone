@@ -1,0 +1,2 @@
+$(".like_btn").html("<%= escape_javascript(render('partials/like', user: @user)) %>");
+$("#user-<%= @user.id%>").html("<%= escape_javascript(render('partials/like', user: @user)) %>");

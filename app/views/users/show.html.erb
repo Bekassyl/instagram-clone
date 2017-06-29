@@ -1,12 +1,75 @@
-<h2><%= @user.login %></h2>
+<div class="posts-wrapper">
+  <div class="row profile header">
+    <div class="col-md-6">
+      <div class="img-circle-med">
+        <%= image_tag @user.avatar(:avatar) %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="user-name-and-follow">
+        <h3><%= @user.login %></h3>
+        <span><%= render "partials/page_btn" %></span>
+      </div>
+      <p class="piss"><%= @user.bio %></p>
+      <div class="user-statistics">
+        <il, class="piss"><%= pluralize @user.posts.count, 'post'%></il> <il, class="piss"><%= pluralize @user.followers.count, 'followers'%></il>
+        <il, class="piss"><%= pluralize @user.likes.count, 'likes'%></il>
+      </div>
+    </div>
 
-<div class="page_btn">
-  <%= render "partials/page_btn" %>
+  </div>
+
 </div>
 
-<div class="container">
-  <% @posts.each do |post| %>
-    <%= image_tag post.image(:large) %>
-    <p><%= post.description %></p>
-  <% end %>
-</div>
+
+<body>
+  <div class="posts-wrapper row">
+        <% if signed_in? %>
+          <% @posts.reverse_each do |post| %>
+          <div class="post">
+            <div class="post-head">
+              <div class="name">
+                <%= image_tag post.user.avatar(:thumbnail), class: "img-circle-mini" %>
+                <%= post.user.login %>
+              </div>
+            </div>
+            <div class="image center-block">
+              <%= link_to image_tag(post.image(:large)), post_path(post.id) %>
+            </div>
+            <div class="post-foot">
+              <div class="name">
+                <il><%= post.user.login %></il>   <il class="caption"><%= post.description %></il>
+              </div>
+              <% if post.comments%>
+                <%- post.comments.each do |comment| %>
+                <div class="comment">
+                  <div class="name">
+                    <il><%= comment.user.login %></il>   <il class="caption"><%= comment.content %></il>
+
+                  <%- if comment.user == current_user%>
+                    <%= link_to post_comment_path(post, comment), method: :delete do %>
+                      <span class="glyphicon glyphicon-remove delete-comment"> </span>
+                    <% end %>
+                  <% end %>
+                  </div>
+                </div>
+                <% end %>
+              <% end %>
+              <div class="comment-like-form row">
+                <div class="like-button col-sm-1">
+                  <span><%= render "partials/like_btn" %></span>
+                </div>
+                <div class="comment-form col-sm-1">
+                  <%= form_for [post, post.comments.new] do |f| %>
+                    <%= f.text_field :content, placeholder: 'Add a comment...' %>
+                  <% end %>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+          <% end %>
+        <% end %>
+  </div>
+</body>

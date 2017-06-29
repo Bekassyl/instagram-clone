@@ -8,5 +8,13 @@ module UsersHelper
     end
   end
 
+  def likes?(post)
+    if current_user.liking?(post)
+      render "partials/dislike", post: post
+    else
+      render "partials/like", post: post
+    end
+  end
+
 
 end

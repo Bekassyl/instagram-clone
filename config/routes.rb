@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  # get 'likes/create'
+  #
+  # get 'likes/destroy'
+
   root "static_pages#home"
   get "/about", to: "static_pages#about"
   get "/signup", to: "users#new"
@@ -6,11 +10,16 @@ Rails.application.routes.draw do
   post "/signin", to: "sessions#create"
   get "/signout", to: "sessions#destroy"
   delete "/relationships", to: "relationships#destroy"
+  # delete "/comments", to: "static_pages#home"
 
   resources :users
-  resources :posts, except: :index
+  resources :posts, except: :index do
+    resources :comments
+    # resources :likes
+  end
   resources :sessions, only: [:new, :destroy, :create]
   resources :relationships, only: [:create]
+  resources :likes, only: [:create]
 
 
   # The priority is based upon order of creation: first created -> highest priority.

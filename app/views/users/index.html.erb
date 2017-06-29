@@ -5,7 +5,7 @@
     <% end %>
 
     <li class="list-group-item">
-         <%= image_tag "http://placehold.it/60x60", class: "img-circle" %>
+         <%= image_tag user.avatar(:thumbnail), class: "img-circle-mini" %>
          <%= link_to user.login, user %>
          <div class="follow" id="user-<%= user.id%>">
             <%= follows?(user) %>
